@@ -1,20 +1,21 @@
 
 
 body{
-    background-image: url(images/palmiers.png);
-	background-size: 1700px
+    background-image: url(images/palmiers);
+	background-size: 1700px;
 }
 
 .active{
-	color:#FFC0CB;
+	color: #FFC0CB;
 }
-#bas{
-	/*background-image: url(images/paradise.png);*/
+
+#inactive{
+	color: white;
 }
 
 .h1{
 	
-	color:#FFC0CB;
+	color:  #FFC0CB;
 	width: 36%;
     margin-top: 100px;
     /*padding-bottom: 10px;*/
@@ -33,6 +34,7 @@ body{
 	margin-top: 100px;
 	margin-left: auto;
     margin-right: auto;
+	
 }
 
 th{
@@ -51,5 +53,10 @@ td{
 }
 
 #button {
+	margin-left: 1200px;
+}
+
+#rose{
+	background-color:pink;
 	margin-left: 1200px;
 }

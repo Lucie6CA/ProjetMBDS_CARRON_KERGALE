@@ -17,21 +17,18 @@
 	</head>
 	
 	<body>
-	<header id="haut">
 	
-	
-	</header>
 	
 	
 	<nav class="navbar" navbar-default role=navigatio>
 			
 			
-			<a class="nav-link" href="accueil.php">Accueil</a>
+			<a id="inactive" class="nav-link" href="accueil.php">Accueil</a>
 			
 			<a class="nav-link active" href="employes.php">Employés</a>
-			<a class="nav-link" href="circuits.php">Circuits</a>
-			<a class="nav-link" href="clients.php">Clients</a>
-			<a class="nav-link" href="reservations.php">Réservations</a>
+			<a id="inactive" class="nav-link" href="circuits.php">Circuits</a>
+			<a id="inactive" class="nav-link" href="clients.php">Clients</a>
+			<a id="inactive" class="nav-link" href="reservations.php">Réservations</a>
 			
 			
 			
@@ -40,33 +37,54 @@
 				<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Rechercher</button>
 			</form>
 			
-			<a class="nav-link" href="deconnexion.php">Déconnexion</a>
+			<a id="inactive" class="nav-link" href="deconnexion.php">Déconnexion</a>
 			
 		
 		</nav>
 		
 		<section id="bas">
-			<fieldset class="fieldset1">
-			<h1 align="center">Employés</legend>
-			<br/>
-			<h2> Nom Prénom Email Téléphone Salaire</h2> 
+			
+			
 			
 			<?php
 
-			
-			$nombre_de_lignes = 1;
+			require("connexionBDD.php");
+			global $dbConn;
 
-			if ($nombre_de_lignes <= 15)
-			{
-				
-				echo 'Employé : '.$_POST["nomEmploye"]. ' - '.$_POST["prenomEmploye"].' - '.$_POST["email"].' - '.$_POST["Téléphone"]. ' - '.$_POST['Salaire'];
-				$nombre_de_lignes++; // $nombre_de_lignes = $nombre_de_lignes + 1
-			}
-			//je n'arrive pas à ajouter 2 employés à la suite, il faudrait que je fasse une fonction qui à chauqe fois que j'appuie sur le submit, ajoute à la liste des employés, le nouvel employé
-		
+			
+			$stid = oci_parse($dbConn, 'SELECT * from EMPLOYES');
+				oci_execute($stid);
+				echo '<table class="table">';
+				echo "<thead>";
+				echo "<tr>";
+														
+				echo "<th>"."Nom"."</th>";
+				echo "<th>"."Prénom"."</th>";
+				echo "<th>"."Email"."</th>";
+				echo "<th>"."Téléphone"."</th>";
+				echo "<th>"."Salaire"."</th>";
+				//echo "<th>"."</th>";
+				echo "<th>"."</th>";
+				echo "</tr>";
+				echo "</thead>";
+				echo "<tbody>";
+				while (($emp = oci_fetch_array($stid, OCI_BOTH)) != false) {
+				 echo "<tr>";    
+				 echo "<td>".$emp['NOMEMPLOYE']."</td>";
+				 echo "<td>".$emp['PRENOMEMPLOYE']."</td>";
+				 echo "<td>".$emp['EMAILEMPLOYE']."</td>";
+				 echo "<td>".$emp['TELEMPLOYE']."</td>";
+				 echo "<td>".$emp['SALAIRE']."</td>";
+				 echo '<td>'.'<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">'.'Modifier'.'</button>'.'</td>';
+				 //echo '<td>'.'<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">'.'Supprimer'.'</button>'.'</td>';
+				 echo "</tr>";
+             }
+				echo "</tbody>"          ;
+				echo "</table>";
+
 			?>
 			
-			</fieldset>
+			
 				
 		
 		
@@ -75,6 +93,7 @@
 		<section id="footer">
 		
 			  <input id="button" type=button class="btn btn-light" title= "Ajouter un employé" onclick=window.location.href='formulaireEmployes.php' value= Ajouter />
+			  <input id="button" type=button class="btn btn-light" title= "Supprimer un employé" onclick=window.location.href='formulaireSuppr.php' value= Supprimer />
 
 		</section>
 		

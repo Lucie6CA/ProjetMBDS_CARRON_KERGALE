@@ -10,7 +10,7 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		
 		<title>
-			Formulaire employés Maison Nomade
+			Accueil Maison Nomade
 		</title>
 		
 		<link rel="stylesheet" href="styleFormulaires.css" media="screen" type="text/css" />
@@ -43,7 +43,7 @@
 		</nav>
 		
 		<section id="bas">
-		<form method="post" action="addEmployes.php">
+		<form method="post" action="employes.php">
 		
 		
 		<table class="table">
@@ -55,11 +55,6 @@
           </tr>
         </thead>
         <tbody>
-		<tr>
-            <td><label for="idEmploye" > Identifiant : </label></td>
-            <td><input type="text" name="idEmploye"/></td>
-            
-		   </tr>
           <tr>
             <td><label for="nomEmploye" > Nom : </label></td>
             <td><input type="text" name="nomEmploye"/></td>
@@ -76,8 +71,8 @@
             
 		   </tr>
 		   <tr>
-            <td><label for="Telephone" > Téléphone : </label></td>
-            <td><input type="text" name="Telephone"/></td>
+            <td><label for="Téléphone" > Téléphone : </label></td>
+            <td><input type="text" name="Téléphone"/></td>
             
 		   </tr>
 		   <tr>
@@ -95,7 +90,7 @@
       </table>
 			
 			
-			<input type="submit" value="Valider" onclick=window.location.href='addEmployes.php'/>
+			<input type="submit" value="Valider" onclick=window.location.href='formulaireEmployes.php'/>
 		</form>
 			
 		

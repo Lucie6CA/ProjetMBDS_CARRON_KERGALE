@@ -26,12 +26,12 @@
 	<nav class="navbar" navbar-default role=navigatio>
 			
 			
-			<a class="nav-link" href="accueil.php">Accueil</a>
+			<a id="inactive" class="nav-link" href="accueil.php">Accueil</a>
 			
-			<a class="nav-link" href="employes.php">Employés</a>
-			<a class="nav-link" href="circuits.php">Circuits</a>
+			<a id="inactive" class="nav-link" href="employes.php">Employés</a>
+			<a id="inactive" class="nav-link" href="circuits.php">Circuits</a>
 			<a class="nav-link active" href="clients.php">Clients</a>
-			<a class="nav-link" href="reservations.php">Réservations</a>
+			<a id="inactive" class="nav-link" href="reservations.php">Réservations</a>
 			
 			
 			
@@ -40,51 +40,47 @@
 				<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Rechercher</button>
 			</form>
 			
-			<a class="nav-link" href="deconnexion.php">Déconnexion</a>
+			<a id="inactive" class="nav-link" href="deconnexion.php">Déconnexion</a>
 			
 		
 		</nav>
 		
 		<section id="bas">
 		
-		<table class="table">
-        <thead>
-          <tr>
-			
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Email</th>
-			<th>Télephone</th>
-			<th>Adresse</th>
-			<th> </th>
-			<th> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Dupont</td>
-            <td>Charles</td>
-            <td>d.charles@gmail.com</td>
-			<td>0523698575</td>
-			<td>18 rue de lain, 64200 Biarritz</td>
-			<td><button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Modifier</button></td>
-			<td><button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Supprimer</button></td>
+		<?php
 
+			require("connexionBDD.php");
+			global $dbConn;
 
-          </tr>
-          <tr>
-            <td>ROBERT</td>
-            <td>Léa</td>
-            <td>l.robert@yahoo.fr</td>
-			<td>0771266379</td>
-			<td>15 lotissement ror, 31450 Ayguesives</td>
-			<td><button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Modifier</button></td>
-			<td><button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Supprimer</button></td>
 			
-          </tr>
-          
-        </tbody>
-      </table>
+			$stid = oci_parse($dbConn, 'SELECT * from CLIENT');
+				oci_execute($stid);
+				echo '<table class="table">';
+				echo "<thead>";
+					echo "<tr>";
+					
+						echo "<th>"."Nom"."</th>";
+						echo "<th>"."Prénom"."</th>";
+						echo "<th>"."Téléphone"."</th>";
+						echo "<th>"."Email"."</th>";
+						echo "<th>"."</th>";
+						echo "<th>"."</th>";
+					echo "</tr>";
+				echo "</thead>";
+				echo "<tbody>";
+					while (($emp = oci_fetch_array($stid, OCI_BOTH)) != false) {
+					 echo "<tr>";    
+						 echo "<td>".$emp['NOMCLIENT']."</td>";
+						 echo "<td>".$emp['PRENOMCLIENT']."</td>";
+						 echo "<td>".$emp['TELCLIENT']."</td>";
+						 echo "<td>".$emp['EMAILCLIENT']."</td>";
+						 echo '<td>'.'<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">'.'Modifier'.'</button>'.'</td>';
+					 echo "</tr>";
+					}
+				echo "</tbody>"          ;
+				echo "</table>";
+
+			?>
 
 			
 		
@@ -93,6 +89,7 @@
 		<section id="footer">
 		
 			  <input id="button" type=button class="btn btn-light" title= "Ajouter un client" onclick=window.location.href='formulaireClients.php' value= Ajouter />
+			  <input id="button" type=button class="btn btn-light" title= "Supprimer un client" onclick=window.location.href='formulaireSupprClient.php' value= Supprimer />
 
 		</section>
 	</body>

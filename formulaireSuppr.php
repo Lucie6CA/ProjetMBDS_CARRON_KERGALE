@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,10 +10,10 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		
 		<title>
-			Accueil Maison Nomade
+			Fomulaire Suppression Employés Maison Nomade
 		</title>
 		
-		<link rel="stylesheet" href="styleAccueil.css" media="screen" type="text/css" />
+		<link rel="stylesheet" href="styleFormulaires.css" media="screen" type="text/css" />
 		
 	</head>
 	
@@ -26,9 +27,9 @@
 	<nav class="navbar" navbar-default role=navigatio>
 			
 			
-			<a class="nav-link active" href="accueil.php">Accueil</a>
+			<a id="inactive" class="nav-link" href="accueil.php">Accueil</a>
 			
-			<a id="inactive" class="nav-link inactive" href="employes.php">Employés</a>
+			<a id="inactive" class="nav-link" href="employes.php">Employés</a>
 			<a id="inactive" class="nav-link" href="circuits.php">Circuits</a>
 			<a id="inactive" class="nav-link" href="clients.php">Clients</a>
 			<a id="inactive" class="nav-link" href="reservations.php">Réservations</a>
@@ -37,22 +38,37 @@
 			
 			
 			
-			<a id="inactive" class="nav-link" href="deconnexion.php">Déconnexion</a>
 			
 		
 		</nav>
 		
 		<section id="bas">
 		
-		<h1 class="h1">
-			Bienvenue sur le site de gestion de l'agence de voyage de Maison Nomade 
-		</h1>
-
+		<form method="post" action="Suppr.php">
+		
+		
+			<table class="table">
+				<thead>
+				<tr>
 			
-		
-		
+					<th>Formulaire pour supprimer un employé :</th>
+        
+				</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><label for="id" > Identifiant Employe: </label></td>
+						<td><input type="numero" name="id" /></td>         
+					</tr>
+          
+				</tbody>
+			</table>
+			
+			
+			<input type="submit" value="Valider" onclick=window.location.href='formulaireSuppr.php'/>
+		</form>
 		</section>
+		
 	</body>
 
 </html>
-	
