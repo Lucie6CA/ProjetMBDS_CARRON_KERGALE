@@ -10,7 +10,7 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		
 		<title>
-			Formulaire employés Maison Nomade
+			Fomulaire clients Maison Nomade
 		</title>
 		
 		<link rel="stylesheet" href="styleFormulaires.css" media="screen" type="text/css" />
@@ -27,12 +27,12 @@
 	<nav class="navbar" navbar-default role=navigatio>
 			
 			
-			<a class="nav-link active" href="accueil.php">Accueil</a>
+			<a id="inactive" class="nav-link " href="accueil.php">Accueil</a>
 			
-			<a class="nav-link" href="employes.php">Employés</a>
-			<a class="nav-link" href="circuits.php">Circuits</a>
-			<a class="nav-link" href="clients.php">Clients</a>
-			<a class="nav-link" href="reservations.php">Réservations</a>
+			<a id="inactive" class="nav-link" href="employes.php">Employés</a>
+			<a id="inactive" class="nav-link" href="circuits.php">Circuits</a>
+			<a id="inactive" class="nav-link" href="clients.php">Clients</a>
+			<a id="inactive" class="nav-link" href="reservations.php">Réservations</a>
 			
 			
 			
@@ -43,31 +43,31 @@
 		</nav>
 		
 		<section id="bas">
-		<form method="post" action="addEmployes.php">
+		<form method="post" action="addClients.php">
 		
 		
 		<table class="table">
         <thead>
           <tr>
 			
-            <th>Formulaire pour ajouter un employé :</th>
+            <th>Formulaire pour ajouter un client :</th>
         
           </tr>
         </thead>
         <tbody>
 		<tr>
-            <td><label for="idEmploye" > Identifiant : </label></td>
-            <td><input type="text" name="idEmploye"/></td>
+            <td><label for="idClient" > Identifiant : </label></td>
+            <td><input type="text" name="idClient"/></td>
             
 		   </tr>
           <tr>
-            <td><label for="nomEmploye" > Nom : </label></td>
-            <td><input type="text" name="nomEmploye"/></td>
+            <td><label for="nomClient" > Nom : </label></td>
+            <td><input type="text" name="nomClient"/></td>
             
 		   </tr>
 		   <tr>
-            <td><label for="prenomEmploye" > Prénom : </label></td>
-            <td><input type="text" name="prenomEmploye"/></td>
+            <td><label for="prenomClient" > Prénom : </label></td>
+            <td><input type="text" name="prenomClient"/></td>
             
 		   </tr>
 		   <tr>
@@ -76,26 +76,22 @@
             
 		   </tr>
 		   <tr>
-            <td><label for="Telephone" > Téléphone : </label></td>
-            <td><input type="text" name="Telephone"/></td>
+            <td><label for="telephone" > Téléphone : </label></td>
+            <td><input type="text" name="telephone"/></td>
             
 		   </tr>
 		   <tr>
-            <td><label for="Salaire" > Salaire : </label></td>
-            <td><input type="text" name="Salaire"/></td>
+            <td><label for="adresse" > Adresse : </label></td>
+            <td><input type="text" name="adresse"/></td>
             
 		   </tr>
-		   <tr>
-            <td><label for="password" > Mot de passe : </label></td>
-            <td><input type="password" name="password" /></td>
-            
-		   </tr>
+		   
           
         </tbody>
       </table>
 			
 			
-			<input type="submit" value="Valider" onclick=window.location.href='addEmployes.php'/>
+			<input type="submit" value="Valider" onclick=window.location.href='addClients.php'/>
 		</form>
 			
 		

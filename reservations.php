@@ -26,11 +26,11 @@
 	<nav class="navbar" navbar-default role=navigatio>
 			
 			
-			<a class="nav-link" href="accueil.php">Accueil</a>
+			<a id="inactive" class="nav-link" href="accueil.php">Accueil</a>
 			
-			<a class="nav-link" href="employes.php">Employés</a>
-			<a class="nav-link" href="circuits.php">Circuits</a>
-			<a class="nav-link" href="clients.php">Clients</a>
+			<a id="inactive" class="nav-link" href="employes.php">Employés</a>
+			<a id="inactive" class="nav-link" href="circuits.php">Circuits</a>
+			<a id="inactive" class="nav-link" href="clients.php">Clients</a>
 			<a class="nav-link active" href="reservations.php">Réservations</a>
 			
 			
@@ -40,54 +40,60 @@
 				<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Rechercher</button>
 			</form>
 			
-			<a class="nav-link" href="deconnexion.php">Déconnexion</a>
+			<a id="inactive" class="nav-link" href="deconnexion.php">Déconnexion</a>
 			
 		
 		</nav>
 		
-		<section id="bas">
-		
-		<table class="table">
-        <thead>
-          <tr>
+		<?php
+
+			require("connexionBDD.php");
+			global $dbConn;
+
 			
-            <th>Nom du client</th>
-            <th>Ref client</th>
-            <th>Ref Circuit</th>
-			<th>Date de départ</th>
-			<th>Date d'arrivée</th>
-			<th>Nombre de passagers</th>
-			<th> </th>
-			<th> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Dupont</td>
-            <td>24BGX</td>
-            <td>789PAFR</td>
-			<td>18/07/2020</td>
-			<td>26/07/2020</td>
-			<td>4</td>
-			<td><button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Modifier</button></td>
-			<td><button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Supprimer</button></td>
+			$stid = oci_parse($dbConn, 'SELECT * from RESERVATION');
+				oci_execute($stid);
+				echo '<table class="table">';
+				echo "<thead>";
+				echo "<tr>";
+														
+				echo "<th>"."Nom Client - id"."</th>";
+				echo "<th>"."Ref circuit - id"."</th>";
+				echo "<th>"."Date de départ"."</th>";
+				echo "<th>"."date de fin"."</th>";
+				echo "<th>"."Nombre de passager"."</th>";
 
+				//echo "<th>"."</th>";
+				echo "<th>"."</th>";
+				echo "</tr>";
+				echo "</thead>";
+				echo "<tbody>";
+				while (($emp = oci_fetch_array($stid, OCI_BOTH)) != false) {
+				 echo "<tr>";    
+				 echo "<td>".$emp['ID_CLIENT']."</td>";
+				 echo "<td>".$emp['ID_PROGCIRCUIT']."</td>";
+				 echo "<td>".$emp['DATE_DEBUT']."</td>";
+				 echo "<td>".$emp['DATE_FIN']."</td>";
+				 echo "<td>".$emp['NBPASSAGER']."</td>";
+				 echo '<td>'.'<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">'.'Modifier'.'</button>'.'</td>';
+				 //echo '<td>'.'<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">'.'Supprimer'.'</button>'.'</td>';
+				 echo "</tr>";
+             }
+				echo "</tbody>"          ;
+				echo "</table>";
 
-          </tr>
-          
-          
-        </tbody>
-      </table>
-
+			?>
+			
 			
 		
 		
 		</section>
 		<section id="footer">
-		
-			  <input id="button" type=button class="btn btn-light" title= "Ajouter une réservation" onclick=window.location.href='formulaireReservation.php' value= Ajouter />
+			<td><input id="rose" type=button class="btn btn-light" title= "Détails de la réservation" onclick=window.location.href='detailResa.php' value= Détails /></td>
+		    <input id="button" type=button class="btn btn-light" title= "Supprimer une réservation" onclick=window.location.href='formulaireSupprResa.php' value= Supprimer />
 
 		</section>
+			
 	</body>
 
 </html>

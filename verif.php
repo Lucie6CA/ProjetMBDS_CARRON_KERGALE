@@ -14,7 +14,9 @@ if(isset($_POST['email']) && isset($_POST['password']))
 	(HOST =".$dbHost.")(PORT = ".$dbHostPort."))
 	(CONNECT_DATA = (SERVICE_NAME = ".$dbServiceName.")))";
 
-	if(!$dbConn=oci_connect($usr,$pswd, $dbConnStr)){
+	$dbConn=oci_connect($usr,$pswd, $dbConnStr);
+	
+	if(!$dbConn){
 		$err=oci_error();
 		trigger_error("Connexion non établie : " .$err ['message'], E_USER_ERROR);
 	}
@@ -26,23 +28,32 @@ if(isset($_POST['email']) && isset($_POST['password']))
 	if($_POST['email'] !== "" && $_POST['password'] !== "")
     {
 		$mailE = $_POST['email'];
-		$mdp = $_POST['password'];
-        $requete = "SELECT emailEmploye, mdp FROM employes";
+		$mdpE = $_POST['password'];
+		echo $mailE;
+		echo $mdpE;
+        $requete = "SELECT EMAILEMPLOYE, MDP FROM EMPLOYES
+					WHERE EMAILEMPLOYE ='".$mailE."'";
+		
+		echo $requete;
 		
 			  
-			  
-        $exec_requete = oci_parse($dbConnStr,$requete);
+        $exec_requete = oci_parse($dbConn,$requete);
 		//$info = $infos = array();
 		
+		if (! oci_execute($exec_requete)){
+			$err = oci_error($exec_requete);
+			trigger_error('Query Failed'. $err['message'], E_USER_ERROR);
+		}
 		
 		while (oci_fetch($exec_requete)){
-			$a = oci_result($exec_requete, 'emailEmploye');
-			$b = oci_result($exec_requete, 'mdp');
+			$passwordCheck = oci_result($exec_requete, 'MDP');
 			
-			if($mailE == $a && $mdp == $b) // nom d'utilisateur et mot de passe correctes
+			if( $mdpE == $passwordCheck) //  mot de passe correctes
 			{
-				//$_SESSION['email'] = $email;
-				header('Location: connexion.php');
+				session_start();
+				$_SESSION['email'] = $email;
+				header('Location: accueil.php');
+				exit();
 			}
 			else
 			{

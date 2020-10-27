@@ -26,12 +26,12 @@
 	<nav class="navbar" navbar-default role=navigatio>
 			
 			
-			<a class="nav-link" href="accueil.php">Accueil</a>
+			<a id="inactive" class="nav-link" href="accueil.php">Accueil</a>
 			
-			<a class="nav-link" href="employes.php">Employés</a>
+			<a id="inactive" class="nav-link" href="employes.php">Employés</a>
 			<a class="nav-link active" href="circuits.php">Circuits</a>
-			<a class="nav-link" href="clients.php">Clients</a>
-			<a class="nav-link" href="reservations.php">Réservations</a>
+			<a id="inactive" class="nav-link" href="clients.php">Clients</a>
+			<a id="inactive" class="nav-link" href="reservations.php">Réservations</a>
 			
 			
 			
@@ -40,59 +40,56 @@
 				<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Rechercher</button>
 			</form>
 			
-			<a class="nav-link" href="deconnexion.php">Déconnexion</a>
+			<a id="inactive" class="nav-link" href="deconnexion.php">Déconnexion</a>
 			
 		
 		</nav>
 		
 		<section id="bas">
+		<?php
+
+			require("connexionBDD.php");
+			global $dbConn;
+
+			
+			$stid = oci_parse($dbConn, 'SELECT * from PROCIRCUIT');
+				oci_execute($stid);
+				echo '<table class="table">';
+				echo "<thead>";
+				echo "<tr>";
+				echo "<th>"."Nom du circuit"."</th>";		
+				echo "<th>"."Pays"."</th>";
+				echo "<th>"."Ville"."</th>";
+				echo "<th>"."Hotel"."</th>";
+
+				//echo "<th>"."</th>";
+				echo "<th>"."</th>";
+				echo "</tr>";
+				echo "</thead>";
+				echo "<tbody>";
+				while (($emp = oci_fetch_array($stid, OCI_BOTH)) != false) {
+				 echo "<tr>";    
+				 echo "<td>".$emp['NOM_CIRCUIT']."</td>";
+				 echo "<td>".$emp['PAYS']."</td>";
+				 echo "<td>".$emp['VILLE']."</td>";
+				 echo "<td>".$emp['NOMHOTEL']."</td>";
+				 echo '<td>'.'<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">'.'Modifier'.'</button>'.'</td>';
+				 //echo '<td>'.'<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">'.'Supprimer'.'</button>'.'</td>';
+				 echo "</tr>";
+             }
+				echo "</tbody>"          ;
+				echo "</table>";
+
+			?>
 		
-		<table class="table">
-        <thead>
-          <tr>
-			
-            <th>Pays</th>
-            <th>Ville</th>
-            <th>Hotel</th>
-			<th>Duree min</th>
-			<th>Prix min (€)</th>
-			<th> </th>
-			<th> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>FRANCE</td>
-            <td>Paris</td>
-            <td>Mandarin Oriental</td>
-			<td>2 nuits</td>
-			<td>256</td>
-			<td><button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Modifier</button></td>
-			<td><button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Supprimer</button></td>
-
-
-          </tr>
-          <tr>
-            <td>ITALIE</td>
-            <td>Rome</td>
-            <td>Saint Regis</td>
-			<td>2 nuits</td>
-			<td>256</td>
-			<td><button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Modifier</button></td>
-			<td><button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit">Supprimer</button></td>
-			
-          </tr>
-          
-        </tbody>
-      </table>
-
-			
 		
 		
 		</section>
 		<section id="footer">
 		
 			  <input id="button" type=button class="btn btn-light" title= "Ajouter un circuit" onclick=window.location.href='formulaireCircuits.php' value= Ajouter />
+			  <input id="button" type=button class="btn btn-light" title= "Supprimer un circuit" onclick=window.location.href='formulaireSupprCircuit.php' value= Supprimer />
+
 
 		</section>
 	</body>
